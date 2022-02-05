@@ -34,6 +34,7 @@ namespace RentElectricCar.API
                 {
                     setupAction.ReturnHttpNotAcceptable = true;
                 }).AddXmlDataContractSerializerFormatters();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddDbContext<RentACarDbContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("RentCarDb")));
 
