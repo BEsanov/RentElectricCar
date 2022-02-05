@@ -29,7 +29,7 @@ namespace RentElectricCar.API.Controllers
         {
             if (!_carRepository.LocationExists(locationId))
             {
-                NotFound();
+               return NotFound();
             }
             var carsFromRepo = _carRepository.GetCars(locationId);
             return Ok(_mapper.Map<IEnumerable<CarDto>>(carsFromRepo));
