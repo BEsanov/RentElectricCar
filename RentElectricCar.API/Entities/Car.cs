@@ -8,6 +8,11 @@ namespace RentElectricCar.API.Entities
     {
         [Key]
         public Guid CarId { get; set; }
+
+        [Required]
+        [MaxLength(150)]
+        public string CarBrandName { get; set; }
+
         [Required]
         [MaxLength(100)]
         public string ColorName { get; set; }
