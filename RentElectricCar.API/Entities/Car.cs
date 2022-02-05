@@ -20,9 +20,7 @@ namespace RentElectricCar.API.Entities
         [Required]
         [Range(0, 500000)]
         public int MileAge { get; set; }
-        [Required]
-        [MaxLength(100)]
-        public string Transmission { get; set; }
+  
         [Required]
         public DateTimeOffset ProductionDate { get; set; }
 
