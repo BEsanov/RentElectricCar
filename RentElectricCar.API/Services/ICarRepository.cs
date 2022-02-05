@@ -17,5 +17,7 @@ namespace RentElectricCar.API.Services
 
         IEnumerable<Car> GetCars(Guid locationId);
 
+        Car GetCarForLocation(Guid locationId, Guid carId);
+
     }
 }

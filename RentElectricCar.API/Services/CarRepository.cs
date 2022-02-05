@@ -35,9 +35,6 @@ namespace RentElectricCar.API.Services
             return regionAndCity;
         }
 
-
-
-
         public IEnumerable<Car> GetCarsByLocation(Guid locationId)
         {
             //get location id
@@ -77,6 +74,22 @@ namespace RentElectricCar.API.Services
                 .ToList();
 
             return carsFromRepo;
+        }
+        public Car GetCarForLocation(Guid locationId, Guid carId)
+        {
+            if (locationId == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(locationId));
+            }
+            if (carId == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(carId));
+            }
+
+            var carFromDbForLocation = _rentACarDbContext.CarsForRent.Where(car => car.LocationId == locationId&&car.CarId==carId)
+                .FirstOrDefault();
+
+            return carFromDbForLocation;
         }
     }
 }

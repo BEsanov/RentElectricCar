@@ -34,6 +34,20 @@ namespace RentElectricCar.API.Controllers
             var carsFromRepo = _carRepository.GetCars(locationId);
             return Ok(_mapper.Map<IEnumerable<CarDto>>(carsFromRepo));
         }
+        [HttpGet("{carId}")]
+        public ActionResult<CarDto> GetSingleCarForLocation(Guid locationId, Guid carId)
+        {
+            //Check if location exists
+            if (!_carRepository.LocationExists(locationId))
+            {
+                return NotFound();
+            }
+
+            var carFromRepoForLocation = _carRepository.GetCarForLocation(locationId, carId);
+
+            return Ok(_mapper.Map<CarDto>(carFromRepoForLocation));
+           
+        }
 
     }
 }
