@@ -19,7 +19,7 @@ namespace RentElectricCar.API.Controllers
         {
             _carRepository = carRepository ??
                 throw new ArgumentNullException(nameof(carRepository));
-            _mapper = mapper??
+            _mapper = mapper ??
                 throw new ArgumentNullException(nameof(mapper));
         }
         [HttpGet]
@@ -29,19 +29,20 @@ namespace RentElectricCar.API.Controllers
 
             return Ok(_mapper.Map<IEnumerable<LocationDto>>(carsFromRepo));
         }
-        
+
         [HttpGet("{locationId}")]
         public IActionResult GetLocation(Guid locationId)
         {
             var locationFromRepo = _carRepository.GetLocation(locationId);
 
-            if (locationFromRepo==null)
+            if (locationFromRepo == null)
             {
                 return NotFound();
             }
 
-            return Ok(locationFromRepo);
+            return Ok(_mapper.Map<LocationDto>(locationFromRepo));
         }
+
 
 
     }

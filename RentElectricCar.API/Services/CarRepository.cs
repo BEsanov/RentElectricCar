@@ -57,6 +57,26 @@ namespace RentElectricCar.API.Services
             //return carsInlocation;
         }
 
+        public bool LocationExists(Guid locationId)
+        {
+            if (locationId == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(locationId));
+            }
+            return _rentACarDbContext.Locations.Any(loc => loc.LocationId == locationId);
+        }
 
+        public IEnumerable<Car> GetCars(Guid locationId)
+        {
+            if (locationId == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(locationId));
+            }
+
+            var carsFromRepo = _rentACarDbContext.CarsForRent.Where(car => car.LocationId == locationId)
+                .ToList();
+
+            return carsFromRepo;
+        }
     }
 }

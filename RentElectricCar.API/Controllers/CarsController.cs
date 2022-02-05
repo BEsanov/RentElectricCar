@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using RentElectricCar.API.Contexts;
 using RentElectricCar.API.Entities;
+using RentElectricCar.API.Models;
 using RentElectricCar.API.Services;
 using System;
+using System.Collections.Generic;
 
 namespace RentElectricCar.API.Controllers
 {
@@ -11,26 +14,26 @@ namespace RentElectricCar.API.Controllers
     public class CarsController : ControllerBase
     {
         private readonly ICarRepository _carRepository;
+        private readonly IMapper _mapper;
 
-        public CarsController(ICarRepository carRepository)
+        public CarsController(ICarRepository carRepository, IMapper mapper)
         {
             _carRepository = carRepository ??
                 throw new ArgumentNullException(nameof(carRepository));
+            _mapper = mapper ??
+                throw new ArgumentNullException(nameof(mapper));
         }
+
         [HttpGet]
-        public IActionResult GetCars()
+        public ActionResult<IEnumerable<CarDto>> GetCarsForLocation(Guid locationId)
         {
-            var carsFromRepo = _carRepository.GetCars();
-            return Ok(carsFromRepo);
+            if (!_carRepository.LocationExists(locationId))
+            {
+                NotFound();
+            }
+            var carsFromRepo = _carRepository.GetCars(locationId);
+            return Ok(_mapper.Map<IEnumerable<CarDto>>(carsFromRepo));
         }
 
-        //[HttpGet]
-        //public ActionResult<Location> GetCarsInLocation(Guid locationId)
-        //{
-        //    var carsFromRepo = _carRepository.GetCarsByLocation(locationId);
-
-        //    return Ok(carsFromRepo);
-
-        //}
     }
 }
