@@ -29,7 +29,12 @@ namespace RentElectricCar.API
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            services.AddControllers(
+                setupAction =>
+                {
+                    setupAction.ReturnHttpNotAcceptable = true;
+                }).AddXmlDataContractSerializerFormatters();
+
             services.AddDbContext<RentACarDbContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("RentCarDb")));
 
             services.AddScoped<ICarRepository, CarRepository>();
