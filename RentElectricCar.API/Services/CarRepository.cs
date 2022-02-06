@@ -28,18 +28,30 @@ namespace RentElectricCar.API.Services
 
             return regionsAndCities;
         }
-        public IEnumerable<Location> GetLocations(string regionName)
+        public IEnumerable<Location> GetLocations(string regionName, string searchQuery)
         {
-            if (string.IsNullOrWhiteSpace(regionName))
+            if (string.IsNullOrWhiteSpace(regionName) && string.IsNullOrWhiteSpace(searchQuery))
             {
                 return GetLocations();
             }
-            regionName = regionName.Trim();
 
-            var requestedCity = _rentACarDbContext.Locations
-                .Where(ct => ct.RegionName == regionName).ToList();
+            var collection = _rentACarDbContext.Locations as IQueryable<Location>;
 
-            return requestedCity;
+            if (!string.IsNullOrWhiteSpace(regionName))
+            {
+                regionName = regionName.Trim();
+                collection = collection.Where(ct => ct.RegionName == regionName);
+            }
+
+            if (!string.IsNullOrWhiteSpace(searchQuery))
+            {
+                searchQuery = searchQuery.Trim();
+
+                collection = collection.Where(sq => sq.CityName.Contains(searchQuery) ||
+                sq.RegionName.Contains(searchQuery));
+            }
+
+            return collection.ToList();
         }
         public Location GetLocation(Guid locationId)
         {

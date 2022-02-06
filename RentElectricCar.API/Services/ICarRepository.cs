@@ -9,7 +9,7 @@ namespace RentElectricCar.API.Services
         IEnumerable<Car> GetCars();
 
         IEnumerable<Location> GetLocations();
-        IEnumerable<Location> GetLocations(string regionName);
+        IEnumerable<Location> GetLocations(string regionName, string searchQuery);
         Location GetLocation(Guid locationId);
 
         IEnumerable<Car> GetCarsByLocation(Guid locationId);

@@ -23,10 +23,10 @@ namespace RentElectricCar.API.Controllers
                 throw new ArgumentNullException(nameof(mapper));
         }
         [HttpGet]
-        public ActionResult<IEnumerable<LocationDto>> GetLocations(string regionName)
+        public ActionResult<IEnumerable<LocationDto>> GetLocations(string regionName,
+            string searchQuery)
         {
-
-            var carsFromRepo = _carRepository.GetLocations(regionName);
+            var carsFromRepo = _carRepository.GetLocations(regionName,searchQuery);
 
             return Ok(_mapper.Map<IEnumerable<LocationDto>>(carsFromRepo));
         }
