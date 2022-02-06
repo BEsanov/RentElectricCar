@@ -28,6 +28,19 @@ namespace RentElectricCar.API.Services
 
             return regionsAndCities;
         }
+        public IEnumerable<Location> GetLocations(string regionName)
+        {
+            if (string.IsNullOrWhiteSpace(regionName))
+            {
+                return GetLocations();
+            }
+            regionName = regionName.Trim();
+
+            var requestedCity = _rentACarDbContext.Locations
+                .Where(ct => ct.RegionName == regionName).ToList();
+
+            return requestedCity;
+        }
         public Location GetLocation(Guid locationId)
         {
             var regionAndCity = _rentACarDbContext.Locations.FirstOrDefault(x => x.LocationId == locationId);
@@ -75,6 +88,7 @@ namespace RentElectricCar.API.Services
 
             return carsFromRepo;
         }
+
         public Car GetCarForLocation(Guid locationId, Guid carId)
         {
             if (locationId == Guid.Empty)
@@ -86,7 +100,7 @@ namespace RentElectricCar.API.Services
                 throw new ArgumentNullException(nameof(carId));
             }
 
-            var carFromDbForLocation = _rentACarDbContext.CarsForRent.Where(car => car.LocationId == locationId&&car.CarId==carId)
+            var carFromDbForLocation = _rentACarDbContext.CarsForRent.Where(car => car.LocationId == locationId && car.CarId == carId)
                 .FirstOrDefault();
 
             return carFromDbForLocation;
