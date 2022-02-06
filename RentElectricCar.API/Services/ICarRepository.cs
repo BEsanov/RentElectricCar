@@ -1,4 +1,5 @@
 ﻿using RentElectricCar.API.Entities;
+using RentElectricCar.API.ResourceParameters;
 using System;
 using System.Collections.Generic;
 
@@ -9,7 +10,7 @@ namespace RentElectricCar.API.Services
         IEnumerable<Car> GetCars();
 
         IEnumerable<Location> GetLocations();
-        IEnumerable<Location> GetLocations(string regionName, string searchQuery);
+        IEnumerable<Location> GetLocations(LocationsResourceParameters locationsResourceParameters);
         Location GetLocation(Guid locationId);
 
         IEnumerable<Car> GetCarsByLocation(Guid locationId);

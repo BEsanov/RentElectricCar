@@ -1,5 +1,6 @@
 ﻿using RentElectricCar.API.Contexts;
 using RentElectricCar.API.Entities;
+using RentElectricCar.API.ResourceParameters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,24 +29,30 @@ namespace RentElectricCar.API.Services
 
             return regionsAndCities;
         }
-        public IEnumerable<Location> GetLocations(string regionName, string searchQuery)
+        public IEnumerable<Location> GetLocations(LocationsResourceParameters locationsResourceParameters)
         {
-            if (string.IsNullOrWhiteSpace(regionName) && string.IsNullOrWhiteSpace(searchQuery))
+            if (locationsResourceParameters == null)
+            {
+                throw new ArgumentNullException(nameof(locationsResourceParameters));
+            }
+
+            if (string.IsNullOrWhiteSpace(locationsResourceParameters.RegionName)
+                && string.IsNullOrWhiteSpace(locationsResourceParameters.SearchQuery))
             {
                 return GetLocations();
             }
 
             var collection = _rentACarDbContext.Locations as IQueryable<Location>;
 
-            if (!string.IsNullOrWhiteSpace(regionName))
+            if (!string.IsNullOrWhiteSpace(locationsResourceParameters.RegionName))
             {
-                regionName = regionName.Trim();
+                var regionName = locationsResourceParameters.RegionName.Trim();
                 collection = collection.Where(ct => ct.RegionName == regionName);
             }
 
-            if (!string.IsNullOrWhiteSpace(searchQuery))
+            if (!string.IsNullOrWhiteSpace(locationsResourceParameters.SearchQuery))
             {
-                searchQuery = searchQuery.Trim();
+              var  searchQuery = locationsResourceParameters.SearchQuery.Trim();
 
                 collection = collection.Where(sq => sq.CityName.Contains(searchQuery) ||
                 sq.RegionName.Contains(searchQuery));

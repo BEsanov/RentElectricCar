@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using RentElectricCar.API.Entities;
 using RentElectricCar.API.Models;
+using RentElectricCar.API.ResourceParameters;
 using RentElectricCar.API.Services;
 using System;
 using System.Collections.Generic;
@@ -23,10 +24,9 @@ namespace RentElectricCar.API.Controllers
                 throw new ArgumentNullException(nameof(mapper));
         }
         [HttpGet]
-        public ActionResult<IEnumerable<LocationDto>> GetLocations(string regionName,
-            string searchQuery)
+        public ActionResult<IEnumerable<LocationDto>> GetLocations([FromQuery]LocationsResourceParameters locationsResourceParameters)
         {
-            var carsFromRepo = _carRepository.GetLocations(regionName,searchQuery);
+            var carsFromRepo = _carRepository.GetLocations(locationsResourceParameters);
 
             return Ok(_mapper.Map<IEnumerable<LocationDto>>(carsFromRepo));
         }
