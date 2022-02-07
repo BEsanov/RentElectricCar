@@ -23,6 +23,8 @@ namespace RentElectricCar.API.Services
 
         void AddLocation(Location location);
 
+        void AddCar(Guid locationId, Car car);
+
         bool Save();
 
     }

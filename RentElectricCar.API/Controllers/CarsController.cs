@@ -29,7 +29,7 @@ namespace RentElectricCar.API.Controllers
         {
             if (!_carRepository.LocationExists(locationId))
             {
-               return NotFound();
+                return NotFound();
             }
             var carsFromRepo = _carRepository.GetCars(locationId);
             return Ok(_mapper.Map<IEnumerable<CarDto>>(carsFromRepo));
@@ -46,8 +46,20 @@ namespace RentElectricCar.API.Controllers
             var carFromRepoForLocation = _carRepository.GetCarForLocation(locationId, carId);
 
             return Ok(_mapper.Map<CarDto>(carFromRepoForLocation));
-           
         }
+        [HttpPost]
+        public ActionResult<CarDto> CreateCarsForLocation(Guid locationId, CarsForCreationDto car )
+        {
+            if (!_carRepository.LocationExists(locationId))
+            {
+                return NotFound();
+            }
 
+            var carEntity = _mapper.Map<Entities.Car>(car);
+
+            _carRepository.AddCar(locationId, carEntity);
+            _carRepository.Save();
+           return Ok();
+        }
     }
 }

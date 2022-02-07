@@ -149,5 +149,13 @@ namespace RentElectricCar.API.Services
 
             return save;
         }
+
+        public void AddCar(Guid locationId, Car car)
+        {
+            car.LocationId = locationId;
+
+            _rentACarDbContext.CarsForRent.Add(car);
+
+        }
     }
 }
