@@ -53,7 +53,7 @@ namespace RentElectricCar.API.Controllers
 
             var locationToReturn = _mapper.Map<LocationDto>(newLocation);
 
-            return CreatedAtRoute("GetLocation", new { LocationId = locationToReturn.City },
+            return CreatedAtRoute("GetLocation", new { locationId=newLocation.LocationId },
                 locationToReturn);
 
         }
