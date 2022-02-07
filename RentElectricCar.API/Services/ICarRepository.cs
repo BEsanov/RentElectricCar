@@ -21,5 +21,9 @@ namespace RentElectricCar.API.Services
 
         Car GetCarForLocation(Guid locationId, Guid carId);
 
+        void AddLocation(Location location);
+
+        bool Save();
+
     }
 }

@@ -13,6 +13,8 @@ namespace RentElectricCar.API.Profiles
                 .ForMember(
                 dest =>dest.City,
                 opt => opt.MapFrom(src => src.CityName));
+
+            CreateMap<Models.LocationForCreationDto, Entities.Location>();
         }
     }
 }

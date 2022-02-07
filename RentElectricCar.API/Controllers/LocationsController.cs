@@ -24,14 +24,14 @@ namespace RentElectricCar.API.Controllers
                 throw new ArgumentNullException(nameof(mapper));
         }
         [HttpGet]
-        public ActionResult<IEnumerable<LocationDto>> GetLocations([FromQuery]LocationsResourceParameters locationsResourceParameters)
+        public ActionResult<IEnumerable<LocationDto>> GetLocations([FromQuery] LocationsResourceParameters locationsResourceParameters)
         {
             var carsFromRepo = _carRepository.GetLocations(locationsResourceParameters);
 
             return Ok(_mapper.Map<IEnumerable<LocationDto>>(carsFromRepo));
         }
 
-        [HttpGet("{locationId}")]
+        [HttpGet("{locationId}", Name = "GetLocation")]
         public IActionResult GetLocation(Guid locationId)
         {
             var locationFromRepo = _carRepository.GetLocation(locationId);
@@ -43,8 +43,20 @@ namespace RentElectricCar.API.Controllers
 
             return Ok(_mapper.Map<LocationDto>(locationFromRepo));
         }
+        [HttpPost]
+        public ActionResult<LocationDto> CreateLocation(LocationForCreationDto location)
+        {
+            var newLocation = _mapper.Map<Entities.Location>(location);
 
+            _carRepository.AddLocation(newLocation);
+            _carRepository.Save();
 
+            var locationToReturn = _mapper.Map<LocationDto>(newLocation);
+
+            return CreatedAtRoute("GetLocation", new { LocationId = locationToReturn.City },
+                locationToReturn);
+
+        }
 
     }
 }

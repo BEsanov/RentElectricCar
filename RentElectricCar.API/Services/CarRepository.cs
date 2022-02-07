@@ -52,7 +52,7 @@ namespace RentElectricCar.API.Services
 
             if (!string.IsNullOrWhiteSpace(locationsResourceParameters.SearchQuery))
             {
-              var  searchQuery = locationsResourceParameters.SearchQuery.Trim();
+                var searchQuery = locationsResourceParameters.SearchQuery.Trim();
 
                 collection = collection.Where(sq => sq.CityName.Contains(searchQuery) ||
                 sq.RegionName.Contains(searchQuery));
@@ -123,6 +123,31 @@ namespace RentElectricCar.API.Services
                 .FirstOrDefault();
 
             return carFromDbForLocation;
+        }
+
+        public void AddLocation(Location location)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            //Generating new Guid for LocationId
+            location.LocationId = Guid.NewGuid();
+
+            //filling carId with new CarId
+            foreach (var car in location.Cars)
+            {
+                car.CarId = Guid.NewGuid();
+            }
+            _rentACarDbContext.Locations.Add(location);
+
+        }
+
+        public bool Save()
+        {
+            var save = _rentACarDbContext.SaveChanges() >= 0;
+
+            return save;
         }
     }
 }
