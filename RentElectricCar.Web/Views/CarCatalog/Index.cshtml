@@ -1,0 +1,9 @@
+﻿@model RentElectricCar.Web.Models.View.LocationListModel
+
+<div class="row">
+
+    @foreach (var item in Model.Locations)
+    {
+        <h1>@item.RegionName</h1>
+    }
+</div>

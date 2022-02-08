@@ -34,7 +34,7 @@ namespace RentElectricCar.API.Controllers
             var carsFromRepo = _carRepository.GetCars(locationId);
             return Ok(_mapper.Map<IEnumerable<CarDto>>(carsFromRepo));
         }
-        [HttpGet("{carId}")]
+        [HttpGet("{carId}", Name = "GetSingleCarForLocation")]
         public ActionResult<CarDto> GetSingleCarForLocation(Guid locationId, Guid carId)
         {
             //Check if location exists
@@ -48,7 +48,7 @@ namespace RentElectricCar.API.Controllers
             return Ok(_mapper.Map<CarDto>(carFromRepoForLocation));
         }
         [HttpPost]
-        public ActionResult<CarDto> CreateCarsForLocation(Guid locationId, CarsForCreationDto car )
+        public ActionResult<CarDto> CreateCarsForLocation(Guid locationId, CarsForCreationDto car)
         {
             if (!_carRepository.LocationExists(locationId))
             {
@@ -59,7 +59,11 @@ namespace RentElectricCar.API.Controllers
 
             _carRepository.AddCar(locationId, carEntity);
             _carRepository.Save();
-           return Ok();
+
+            var carToReturn = _mapper.Map<CarDto>(carEntity);
+
+            return CreatedAtRoute("GetSingleCarForLocation", new { carId = carToReturn.CarId },
+                carToReturn);
         }
     }
 }

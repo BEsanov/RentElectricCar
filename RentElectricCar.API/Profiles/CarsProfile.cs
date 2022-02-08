@@ -10,6 +10,8 @@ namespace RentElectricCar.API.Profiles
                 .ForMember(
                 dest => dest.Brand,
                 opt => opt.MapFrom(src => src.CarBrandName));
+
+            CreateMap<Models.CarsForCreationDto, Entities.Car>();
         }
     }
 }

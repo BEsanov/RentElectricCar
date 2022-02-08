@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.32014.148
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32106.194
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentElectricCar.API", "RentElectricCar.API\RentElectricCar.API.csproj", "{831AA34E-2C91-4245-B6B1-ACF23D290A9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RentElectricCar.API", "RentElectricCar.API\RentElectricCar.API.csproj", "{831AA34E-2C91-4245-B6B1-ACF23D290A9D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontends", "Frontends", "{708D2D92-9664-4168-81B6-5FEDF64D8F2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentElectricCar.Web", "RentElectricCar.Web\RentElectricCar.Web.csproj", "{54FB00ED-F599-46E3-9456-C1C89FAF4B98}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +19,16 @@ Global
 		{831AA34E-2C91-4245-B6B1-ACF23D290A9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{831AA34E-2C91-4245-B6B1-ACF23D290A9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{831AA34E-2C91-4245-B6B1-ACF23D290A9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54FB00ED-F599-46E3-9456-C1C89FAF4B98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54FB00ED-F599-46E3-9456-C1C89FAF4B98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54FB00ED-F599-46E3-9456-C1C89FAF4B98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54FB00ED-F599-46E3-9456-C1C89FAF4B98}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{54FB00ED-F599-46E3-9456-C1C89FAF4B98} = {708D2D92-9664-4168-81B6-5FEDF64D8F2C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D224C930-EC09-4B30-9F3C-02B6B5F6A044}
