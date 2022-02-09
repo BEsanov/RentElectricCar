@@ -1,10 +1,12 @@
-﻿using System;
+﻿using RentElectricCar.API.ValidationAttributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace RentElectricCar.API.Models
 {
-    public class CarsForCreationDto:IValidatableObject
+    [ValidCarBrandName] //This code takes care of CarBrandName validation 
+    public class CarsForCreationDto
     {
         [Required]
         [MaxLength(150)]
@@ -25,15 +27,5 @@ namespace RentElectricCar.API.Models
         public int NumberOfSeats { get; set; }
 
 
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-
-            //need improvement here 
-            if (CarBrandName==null)
-            {
-                yield return new ValidationResult("Provide Car Brand name.",
-                    new[] { "CarsForCreationDto" }); 
-            }   
-        }
     }
 }
