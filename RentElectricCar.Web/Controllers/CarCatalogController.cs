@@ -22,7 +22,7 @@ namespace RentElectricCar.Web.Controllers
 
         public async Task<IActionResult> Index(Guid categoryId)
         {
-            var getLocations = _locationListService.GetCategories();
+            var getLocations = _locationListService.GetAll();
        
 
             return View(
