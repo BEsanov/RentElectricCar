@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using RentElectricCar.API.Contexts;
 using RentElectricCar.API.Entities;
-using RentElectricCar.API.Models;
 using RentElectricCar.API.Services;
+using RentElectricCar.Shared.Models;
 using System;
 using System.Collections.Generic;
 

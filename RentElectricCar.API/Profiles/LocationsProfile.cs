@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
-
+using RentElectricCar.Shared.Models;
 namespace RentElectricCar.API.Profiles
 {
     public class LocationsProfile: Profile
     {
         public LocationsProfile()
         {
-            CreateMap<Entities.Location, Models.LocationDto>()
+            CreateMap<Entities.Location, LocationDto>()
                 .ForMember(
                 dest => dest.Region,
                 opt => opt.MapFrom(src => src.RegionName))
@@ -14,7 +14,7 @@ namespace RentElectricCar.API.Profiles
                 dest =>dest.City,
                 opt => opt.MapFrom(src => src.CityName));
 
-            CreateMap<Models.LocationForCreationDto, Entities.Location>();
+            CreateMap<LocationForCreationDto, Entities.Location>();
         }
     }
 }

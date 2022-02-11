@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using RentElectricCar.Shared.Models;
 
 namespace RentElectricCar.API.Profiles
 {
@@ -6,12 +7,12 @@ namespace RentElectricCar.API.Profiles
     {
         public CarsProfile()
         {
-            CreateMap<Entities.Car, Models.CarDto>()
+            CreateMap<Entities.Car, CarDto>()
                 .ForMember(
                 dest => dest.Brand,
                 opt => opt.MapFrom(src => src.CarBrandName));
 
-            CreateMap<Models.CarsForCreationDto, Entities.Car>();
+            CreateMap<CarsForCreationDto, Entities.Car>();
         }
     }
 }
