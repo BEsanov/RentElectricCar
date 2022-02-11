@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace RentElectricCar.API.Models
+namespace RentElectricCar.Shared.Models
 {
     public class LocationForCreationDto
     {

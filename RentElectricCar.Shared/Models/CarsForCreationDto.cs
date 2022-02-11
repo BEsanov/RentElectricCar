@@ -1,9 +1,9 @@
-﻿using RentElectricCar.API.ValidationAttributes;
+﻿using RentElectricCar.Shared.ValidationAttributes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace RentElectricCar.API.Models
+namespace RentElectricCar.Shared.Models
 {
     [ValidCarBrandName] //This code takes care of CarBrandName validation 
     public class CarsForCreationDto

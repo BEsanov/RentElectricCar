@@ -1,11 +1,11 @@
-﻿using RentElectricCar.API.Models;
+﻿using RentElectricCar.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RentElectricCar.API.ValidationAttributes
+namespace RentElectricCar.Shared.ValidationAttributes
 {
     public class ValidCarBrandName : ValidationAttribute
     {
@@ -23,7 +23,12 @@ namespace RentElectricCar.API.ValidationAttributes
                 return new ValidationResult("Enter valid car name",
                     new[] { nameof(CarsForCreationDto) });
             }
+
+
             return ValidationResult.Success;
         }
+
+
     }
+
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RentElectricCar.API.Models
+namespace RentElectricCar.Shared.Models
 {
     public class LocationDto
     {
